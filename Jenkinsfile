@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy') {
 			steps {
 				echo 'Deploying application to staging...'
-				sh 'pkill -f app.py || true' // Stop any old instance running
+				sh 'pkill -u jenkins -f app.py || true' // Stop any old instance running
 				sh 'nohup venv/bin/python app.py > app.log 2>&1 &' // Run app in the background
 				echo 'Application deployed and running on port 5000!'
 			}
