@@ -17,17 +17,18 @@ This repository contains a simple Flask web application (Student Registration Sy
 
 ### **Setup Instructions**
 
-1.  Bashgit clone https://github.com/anupam66kumar/flask\_Practice.gitcd flask\_Practice
+1.  Bash    git clone https://github.com/anupam66kumar/flask\_Practice.git
+            cd flask\_Practice
     
-2.  Bashpython3 -m venv venvsource venv/bin/activate
+3.  Bash    python3 -m venv venvsource venv/bin/activate
     
-3.  Bashpip install --upgrade pippip install -r requirements.txt
+4.  Bash    pip install --upgrade pippip install -r requirements.txt
     
-4.  Create a .env file in the root project directory: Code snippetMONGO\_URI=mongodb://127.0.0.1:27017/students\_dbSECRET\_KEY=your\_secret\_key
+5.  Create a .env file in the root project directory: Code snippetMONGO\_URI=mongodb://127.0.0.1:27017/students\_dbSECRET\_KEY=your\_secret\_key
     
-5.  Ensure the local MongoDB service is active: Bashsudo systemctl start mongodsudo systemctl status mongod
+6.  Ensure the local MongoDB service is active: Bashsudo systemctl start mongodsudo systemctl status mongod
     
-6.  Bashpython app.pyOpen your browser at http://localhost:5000.
+7.  Bash    python app.py    Open your browser at http://localhost:5000.
     
 
 ### **Jenkins CI/CD Pipeline Configuration**
