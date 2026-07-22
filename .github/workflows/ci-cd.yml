@@ -11,6 +11,14 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    
+    # Add a local MongoDB service container to the runner
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -29,6 +37,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Tests
+        env:
+          MONGO_URI: mongodb://127.0.0.1:27017/test_student_db
         run: |
           . venv/bin/activate
           pytest
