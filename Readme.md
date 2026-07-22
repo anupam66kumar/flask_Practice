@@ -1,4 +1,4 @@
-**Flask CI/CD Pipeline with Jenkins & MongoDB Integration**
+**TASK 1: Flask CI/CD Pipeline with Jenkins & MongoDB Integration**
 
 This repository contains a simple Flask web application (Student Registration System) integrated with a complete CI/CD pipeline using Jenkins, automated testing via pytest, and local MongoDB database support on an Ubuntu environment.
 
@@ -89,3 +89,65 @@ To enable continuous integration on every code change:
 *   **Challenge**: During the Deploy stage of the pipeline, pkill failed with Operation not permitted because Jenkins lacked permission to kill processes belonging to the primary user account (anupam).
     
 *   **Resolution**: Scoped the command to target only processes owned by the specific jenkins user: pkill -u jenkins -f app.py || true.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+**TASK 2: Flask CI/CD Pipeline with GitHub Actions & MongoDB Integration**
+
+This repository contains a Flask web application integrated with a complete CI/CD pipeline using GitHub Actions, automated testing via pytest, and an automated MongoDB service container.
+
+### **Prerequisites & Tech Stack**
+
+*   **Operating System**: Ubuntu / GitHub Actions Runners (ubuntu-latest)
+    
+*   **Backend**: Python 3.12+, Flask, Flask-PyMongo
+    
+*   **Database**: MongoDB (Integrated Service Container)
+    
+*   **CI/CD Tool**: GitHub Actions (Workflows)
+    
+*   **Testing Framework**: pytest
+    
+
+### **Steps Performed in This Project**
+
+1.  **Repository and Branch Structure Setup**
+    
+    *   Configured the GitHub repository (flask\_Practice) with a dual-branch development strategy featuring a **main** branch for production and a **staging** branch for pre-production integration.
+        
+2.  **GitHub Actions Workflow Configuration**
+    
+    *   Created the required directory structure (.github/workflows/) and workflow definition file (ci-cd.yml) across both branches.
+        
+    *   Configured workflow triggers to handle code pushes to the main and staging branches, as well as published release events.
+        
+    *   Integrated a MongoDB service container (mongo:latest) running on port 27017 to enable isolated database testing environments within GitHub Actions.
+        
+3.  **Pipeline Stages Implementation**
+    
+    *   **Build and Test**: Configured the runner to set up Python 3.12, create a virtual environment, upgrade pip, install dependencies from requirements.txt, and execute pytest against the automated test database URI (mongodb://127.0.0.1:27017/test\_student\_db).
+        
+    *   **Deploy to Staging**: Added a conditional deployment job executing automatically upon pushes to the staging branch.
+        
+    *   **Deploy to Production**: Added a conditional deployment job triggered by published GitHub release tags linked to the main branch.
+        
+4.  **Environment Secrets Setup**
+    
+    *   Configured required repository security secrets under GitHub settings (**Settings > Secrets and variables > Actions**) to securely manage deployment parameters (STAGING\_SERVER\_IP, DEPLOY\_KEY, PROD\_SERVER\_IP, and PROD\_API\_TOKEN).
+        
+5.  **Release Tagging and Execution**
+    
+    *   Created and published valid semantic release tags targeting the main branch to successfully trigger, verify, and complete the production deployment workflow run.
+        
+
+### **Required Repository Secrets**
+
+To configure deployments securely, add the following secrets under your repository settings (**Settings > Secrets and variables > Actions**):
+
+*   STAGING\_SERVER\_IP: Target host address for your staging environment deployment.
+    
+*   DEPLOY\_KEY: Private SSH credentials for secure remote server authentication.
+    
+*   PROD\_SERVER\_IP: Target host address for your production environment deployment.
+    
+*   PROD\_API\_TOKEN: Authentication token for production publishing or target external services.
